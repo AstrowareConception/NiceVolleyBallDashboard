@@ -174,12 +174,168 @@ Le pôle pilotage est responsable de l’organisation globale. Il tient à jour 
 
 Il doit veiller à ce que les groupes ne travaillent pas en silo. Le modèle de données doit correspondre aux besoins de l’API. L’API doit fournir les données nécessaires au front. Le front doit respecter les maquettes. Le déploiement doit être compatible avec les choix techniques.
 
+**Livrables attendus :**
+
+* WBS complet
+* Backlog quotidiennement mis à jour
+* RACI du projet
+* Gantt simplifié
+* PERT simplifié
+* Compte-rendus des points d’avancement
+* Support de démonstration finale
+
 ### Pôle UX / UI / maquettes
 
 Le pôle UX / UI produit une charte graphique courte et des maquettes exploitables. Il travaille sur l’ergonomie du dashboard, le parcours de synchronisation, la consultation d’un contact, l’affichage des statistiques et la gestion des segments.
 
 Il doit aussi aider à l’intégration HTML / Tailwind. Ses productions doivent donc être réalistes : composants simples, boutons clairs, tableaux lisibles, messages d’erreur compréhensibles, états vides, états de succès et écrans cohérents.
 
+**Livrables attendus :**
+
+* Charte graphique simplifiée
+* Maquette du dashboard
+* Maquette de la liste des contacts
+* Maquette de la fiche contact
+* Maquette de l’écran de synchronisation
+* Guide rapide des composants UI
+
 ### Pôle MERISE / données / RGPD
 
-Le pôle MERISE est responsable de la cohérence des données. Il rédige les règles de gestion, le dictionnaire de données, le M
+Le pôle MERISE est responsable de la cohérence des données. Il rédige les règles de gestion, le dictionnaire de données, le MCD (Modèle Conceptuel de Données), le MLD (Modèle Logique de Données) et veille à la qualité, à l’intégrité et à la traçabilité des informations au sein du système d’information.
+
+Il accompagne les équipes métiers dans la formalisation des besoins, la modélisation des processus et la définition des référentiels de données. Il s’assure également de la bonne application des normes et méthodes de conception des bases de données.
+
+Dans le cadre du RGPD, le pôle participe à l’identification et à la qualification des données à caractère personnel, contribue à la tenue du registre des traitements, veille au respect des principes de protection des données dès la conception (« privacy by design ») et collabore avec le DPO pour garantir la conformité réglementaire.
+
+Enfin, il assure un rôle de conseil et de support auprès des différents acteurs du projet afin de garantir une gouvernance des données efficace et pérenne.
+
+**Livrables attendus :**
+
+* Règles de gestion
+* Dictionnaire de données
+* MCD
+* MLD
+* Script SQL de création
+* Jeu de données de test
+* Analyse RGPD simplifiée
+
+### Pôle Backend PHP / Slim
+
+Le pôle backend développe l’ensemble des services applicatifs exposés par l’API REST. Il met en place l’architecture du projet Slim, la connexion à PostgreSQL, les routes métier et les échanges avec les API externes.
+
+Il est responsable de la récupération des données Weezevent, de leur traitement, de leur stockage et de leur mise à disposition pour le frontend. Il développe également les mécanismes de segmentation, les statistiques du dashboard et les synchronisations vers Brevo.
+
+Le code doit être structuré, documenté et testé manuellement. Les réponses API doivent être cohérentes, sécurisées et conformes aux besoins du frontend.
+
+**Livrables attendus :**
+
+* Projet Slim fonctionnel
+* Routes API documentées
+* Connexion PostgreSQL
+* Synchronisation Weezevent
+* Gestion des contacts
+* Gestion des segments
+* Statistiques du dashboard
+* Synchronisation Brevo
+* Documentation technique API
+
+### Pôle Frontend HTML / Tailwind / JavaScript
+
+Le pôle frontend développe l’interface utilisateur du dashboard. Il transforme les maquettes en pages HTML fonctionnelles et assure les interactions avec l’API via JavaScript et `fetch()`.
+
+Il est responsable de l’affichage des données, de la navigation entre les écrans, de la gestion des formulaires, des messages utilisateur et de la cohérence visuelle de l’application.
+
+Le frontend doit rester simple, lisible et démontrable. La priorité est donnée à la fonctionnalité et à la clarté plutôt qu’aux effets visuels avancés.
+
+**Livrables attendus :**
+
+* Tableau de bord
+* Liste des contacts
+* Fiche contact
+* Écran de synchronisation Weezevent
+* Écran de segmentation
+* Écran de synchronisation Brevo
+* Écran de connexion (si réalisé)
+* Intégration complète avec l’API
+
+### Pôle SISR / Déploiement / Sécurité / Automatisation
+
+Le pôle SISR est responsable de l’environnement technique du projet. Il met en place Docker Compose, prépare les services nécessaires au développement et documente les procédures d’installation et d’exploitation.
+
+Il veille à la sécurité minimale du prototype : gestion des secrets, isolation des services, sauvegardes, journalisation et contrôle des accès. Il prépare également les bases d’un futur déploiement en production.
+
+Le pôle accompagne les autres équipes sur les problématiques d’infrastructure, de réseau, de configuration et d’automatisation.
+
+**Livrables attendus :**
+
+* Docker Compose fonctionnel
+* Documentation d’installation
+* Gestion des variables d’environnement
+* Procédure de sauvegarde PostgreSQL
+* Procédure de restauration
+* Gestion des logs
+* Checklist sécurité
+* Schéma d’infrastructure
+* Documentation d’exploitation
+
+## 9. Livrables finaux attendus
+
+À la fin de la semaine, la classe devra remettre ou présenter les éléments suivants :
+
+* Prototype fonctionnel du dashboard
+* Dépôt Git propre et documenté
+* MCD et MLD
+* Script SQL de création de la base
+* Documentation utilisateur courte
+* Documentation technique
+* Documentation d’exploitation
+* Docker Compose fonctionnel
+* Présentation finale
+* Backlog final
+* Bilan des fonctionnalités réalisées et non réalisées
+
+## 10. Critères d’évaluation
+
+L’évaluation du projet pourra s’appuyer sur plusieurs critères :
+
+### Fonctionnalité
+
+* Les synchronisations fonctionnent-elles ?
+* Les données sont-elles correctement stockées ?
+* Les contacts sont-ils consultables ?
+* Les segments sont-ils exploitables ?
+* La démonstration est-elle fluide ?
+
+### Qualité technique
+
+* Architecture cohérente
+* Respect des bonnes pratiques
+* Qualité du modèle de données
+* Qualité du code
+* Documentation suffisante
+
+### Gestion de projet
+
+* Utilisation réelle du WBS
+* Utilisation du backlog
+* Mise à jour du RACI
+* Respect du planning
+* Communication entre les pôles
+
+### Infrastructure et sécurité
+
+* Docker opérationnel
+* Sauvegardes documentées
+* Gestion correcte des secrets
+* Journalisation minimale
+* Documentation d’exploitation
+
+### Présentation finale
+
+* Clarté des explications
+* Répartition équilibrée de la parole
+* Démonstration cohérente
+* Capacité à justifier les choix techniques
+* Analyse honnête des limites et perspectives
+
+
