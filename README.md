@@ -238,25 +238,25 @@ Les SISR peuvent également contribuer à la recette, à la documentation, au ma
 
 | Activité                 | Pilotage | UX/UI | MERISE | Backend | Frontend | SISR |
 | ------------------------ | -------- | ----- | ------ | ------- | -------- | ---- |
-| Définition du MVP        | R        | C     | C      | C       | C        | C    |
-| WBS / planning / backlog | R        | I     | I      | I       | I        | C    |
-| Charte graphique         | I        | R     | I      | I       | C        | I    |
-| Maquettes                | I        | R     | C      | I       | C        | I    |
-| Règles de gestion        | C        | I     | R      | C       | I        | I    |
-| MCD / MLD                | I        | I     | R      | C       | I        | C    |
-| Script SQL               | I        | I     | R      | C       | I        | C    |
-| API Slim                 | I        | I     | C      | R       | C        | I    |
-| Import CSV               | I        | I     | C      | R       | C        | C    |
-| Interface HTML/Tailwind  | I        | C     | I      | C       | R        | I    |
-| JavaScript / fetch       | I        | I     | I      | C       | R        | I    |
-| Export Brevo             | I        | I     | C      | R       | C        | C    |
-| Docker DEV               | I        | I     | C      | C       | I        | R    |
-| Sécurité / secrets       | C        | I     | C      | C       | I        | R    |
-| Sauvegardes              | I        | I     | C      | I       | I        | R    |
-| Tests recette            | R        | C     | C      | C       | C        | C    |
-| Démo finale              | R        | R     | R      | R       | R        | R    |
+| Définition du MVP        | A        | C     | C      | C       | C        | R    |
+| WBS / planning / backlog | A        | I     | I      | I       | I        | R    |
+| Charte graphique         | A        | R     | I      | I       | C        | I    |
+| Maquettes                | A        | R     | C      | I       | C        | I    |
+| Règles de gestion        | A        | I     | R      | C       | I        | I    |
+| MCD / MLD                | A        | I     | R      | C       | I        | C    |
+| Script SQL               | A        | I     | R      | C       | I        | C    |
+| API Slim                 | A        | I     | C      | R       | C        | I    |
+| Import CSV               | A        | I     | C      | R       | C        | C    |
+| Interface HTML/Tailwind  | A        | C     | I      | C       | R        | I    |
+| JavaScript / fetch       | A        | I     | I      | C       | R        | I    |
+| Export Brevo             | A        | I     | C      | R       | C        | C    |
+| Docker DEV               | A        | I     | C      | C       | I        | R    |
+| Sécurité / secrets       | A        | I     | C      | C       | I        | R    |
+| Sauvegardes              | A        | I     | C      | I       | I        | R    |
+| Tests recette            | A        | C     | C      | C       | C        | R    |
+| Démo finale              | A        | R     | R      | R       | R        | R    |
 
-R signifie responsable. C signifie contributeur ou consulté. I signifie informé.
+R signifie responsable de la réalisation de la tâche. A signifie approbateur ou garant final de la tâche. C signifie consulté et contribue à la réflexion ou à la réalisation. I signifie informé de l’avancement ou du résultat.
 
 ## 10. Rythme quotidien recommandé
 
