@@ -23,6 +23,8 @@ La semaine 2 doit donc se concentrer sur :
 - [Canevas complet de la semaine 2](canevas-semaine-2.md)
 - [Retours client à intégrer](retours-client-alexandre.md)
 - [Micro-cahier des charges V2](micro-cahier-des-charges-v2.md)
+- [Matrice de traçabilité](matrice-tracabilite.md)
+- [RGPD opérationnel](rgpd-operationnel.md)
 - [Organisation par pôles](organisation-poles.md)
 - [Recette, tests et livraison](recette-tests-livraison.md)
 
@@ -30,16 +32,9 @@ La semaine 2 doit donc se concentrer sur :
 
 ### Lundi matin — reprise collective
 
-Toute la classe reprend :
+Toute la classe reprend : le MVP de juin, le contexte client, les retours d'Alexandre, le périmètre de livraison, les priorités et les rôles.
 
-- le MVP de juin ;
-- le contexte client ;
-- les retours d'Alexandre ;
-- le périmètre de livraison ;
-- les priorités ;
-- les rôles.
-
-La production principale de cette matinée est le micro-cahier des charges V2.
+Production principale : micro-cahier des charges V2 et première matrice de traçabilité.
 
 ### Lundi après-midi à mardi — cadrage V2 et premières évolutions
 
@@ -74,3 +69,7 @@ La production principale de cette matinée est le micro-cahier des charges V2.
 - bilan ;
 - passage de relais ;
 - preuves BTS SIO.
+
+## Lien avec la livraison
+
+La livraison technique et client est détaillée dans [06-livraison](../06-livraison/README.md).

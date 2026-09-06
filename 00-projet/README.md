@@ -22,6 +22,14 @@ Le dashboard doit permettre :
 - la consultation d'indicateurs simples ;
 - une exploitation sécurisée et documentée par le club.
 
+## Documents de référence projet
+
+- [Contexte client et besoin métier](contexte-client.md)
+- [Architecture et pile technique cible](architecture-cible.md)
+- [Flux métier et traitements](flux-metier.md)
+- [Diagrammes Mermaid](diagrammes.md)
+- [Glossaire projet](glossaire.md)
+
 ## Deux temps de réalisation
 
 ### Semaine 1 — MVP
