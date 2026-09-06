@@ -1,341 +1,100 @@
-# Semaine intensive — Projet Nice Volley Ball Dashboard
+# NiceVolleyBallDashboard — repository documentaire
 
-## 1. Objectif général de la semaine
+Repository documentaire du projet **Nice Volley Ball Dashboard**, réalisé avec des étudiants de BTS SIO dans le cadre de deux semaines intensives.
 
-Pendant cette semaine intensive, vous allez travailler sur un projet réel proposé par le Nice Volley Ball. Le club dispose aujourd’hui de plusieurs outils séparés : Weezevent pour la billetterie, Brevo pour les newsletters et les contacts, des fichiers Excel ou Google Sheets pour certains suivis manuels, ainsi que des outils institutionnels comme l’extranet FFVB. Ces outils sont utiles, mais ils ne communiquent pas suffisamment entre eux.
+Ce dépôt ne contient pas l'application elle-même. Il sert à centraliser le cadrage, les consignes pédagogiques, les aides techniques, l'organisation des semaines intensives, les livrables attendus, les éléments de suivi projet et les traces utiles pour la valorisation BTS SIO.
 
-Le problème principal est donc la dispersion des données. Le club ne dispose pas d’une vision claire du parcours d’un supporter : première venue, nombre de matchs vus, intérêt pour les abonnements, présence en famille, potentiel merchandising, réaction aux campagnes ou retour après un événement. Les communications restent trop générales et les relances ne sont pas assez automatisées.
+## Navigation rapide
 
-L’objectif de la semaine n’est pas de développer un CRM complet. L’objectif est de produire un **prototype fonctionnel démontrable** d’un dashboard interne permettant de récupérer automatiquement les données de billetterie depuis l’API REST de Weezevent, de les stocker proprement, de les consulter, de générer quelques indicateurs simples, de segmenter les contacts et de synchroniser certaines données avec Brevo via son API REST.
+### 1. Comprendre le projet
 
-Le projet est majoritairement orienté SLAM, mais les étudiants SISR ont un rôle important sur l’environnement technique, le déploiement, la sécurité, les sauvegardes, les automatisations et la documentation d’exploitation.
+- [Présentation générale du projet](00-projet/README.md)
+- [Contexte client et besoin métier](00-projet/contexte-client.md)
+- [Architecture et pile technique cible](00-projet/architecture-cible.md)
+- [Glossaire projet](00-projet/glossaire.md)
 
-## 2. Résultat attendu vendredi
+### 2. Semaine intensive 1 — cadrage et MVP
 
-À la fin de la semaine, la classe devra pouvoir présenter un prototype cohérent.
+- [Accueil semaine 1](01-semaine-1-mvp/README.md)
+- [Canevas complet de la semaine 1](01-semaine-1-mvp/canevas-semaine-1.md)
+- [Bilan du MVP livré en juin](01-semaine-1-mvp/bilan-mvp-juin.md)
 
-Le scénario de démonstration visé est le suivant :
+### 3. Semaine intensive 2 — finalisation et livraison
 
-Un gestionnaire du club accède à une interface web interne. Il déclenche une synchronisation avec l’API Weezevent. Le système récupère les données de billetterie, crée ou met à jour des contacts dans une base PostgreSQL, détecte certains doublons simples et affiche un bilan de synchronisation. Le gestionnaire peut ensuite consulter la liste des contacts, ouvrir une fiche contact, visualiser quelques indicateurs dans un tableau de bord, afficher des segments simples comme « nouveaux visiteurs », « supporters réguliers » ou « abonnés potentiels », puis synchroniser un segment vers Brevo via son API REST.
+- [Accueil semaine 2](02-semaine-2-livraison/README.md)
+- [Canevas complet de la semaine 2](02-semaine-2-livraison/canevas-semaine-2.md)
+- [Retours client à intégrer](02-semaine-2-livraison/retours-client-alexandre.md)
+- [Micro-cahier des charges V2](02-semaine-2-livraison/micro-cahier-des-charges-v2.md)
+- [Organisation par pôles](02-semaine-2-livraison/organisation-poles.md)
+- [Recette, tests et livraison](02-semaine-2-livraison/recette-tests-livraison.md)
 
-En parallèle, les étudiants SISR devront être capables de montrer comment l’application est lancée, comment les services sont organisés, comment les variables sensibles sont protégées, comment la base est sauvegardée, où sont les logs et quelles précautions sont prévues pour un futur déploiement.
+### 4. Aides techniques
 
-## 3. Pile technique retenue
+- [Accueil des aides techniques](03-aides-techniques/README.md)
+- [Aide Slim / API PHP](03-aides-techniques/aide-slim-api-php.md)
+- [Aide JavaScript vanilla + fetch](03-aides-techniques/aide-javascript-vanilla-fetch.md)
+- [Aide MERISE / données](03-aides-techniques/aide-merise-donnees.md)
 
-La pile technique doit rester adaptée au niveau actuel de la classe. Le projet ne doit pas reposer sur React, Vue ou Angular. L’objectif est de renforcer les bases : HTML, CSS, JavaScript, PHP, SQL, API REST, Docker et déploiement.
+### 5. Suivi projet
 
-La pile retenue est la suivante :
+- [Accueil suivi projet](04-suivi-projet/README.md)
+- [Modèle de backlog](04-suivi-projet/modeles/backlog.md)
+- [Modèle MoSCoW](04-suivi-projet/modeles/moscow.md)
+- [Modèle RACI](04-suivi-projet/modeles/raci.md)
+- [Modèle de compte rendu quotidien](04-suivi-projet/modeles/compte-rendu-quotidien.md)
 
-Côté interface utilisateur, le projet utilisera **HTML**, **Tailwind CSS** et **JavaScript vanilla**. Les pages seront donc construites avec du HTML classique, stylisées avec Tailwind, et rendues dynamiques avec du JavaScript écrit par les étudiants. Les appels au backend se feront avec `fetch()`. Le JavaScript devra gérer l’affichage des contacts, les formulaires, les messages d’erreur, les tableaux, les cartes statistiques et les actions utilisateur.
+### 6. Valorisation BTS SIO
 
-Côté backend, le projet utilisera **PHP avec le micro-framework Slim**. Slim permettra de créer une API REST légère, structurée et compréhensible. Il servira à définir les routes, recevoir les requêtes HTTP, interroger la base de données, communiquer avec les API Weezevent et Brevo, puis renvoyer des réponses JSON.
+- [Accueil évaluation BTS](05-evaluation-bts/README.md)
 
-Côté base de données, le projet utilisera **PostgreSQL**. La base contiendra les contacts, événements, achats, synchronisations, segments, campagnes, utilisateurs et rôles éventuels. Le modèle devra être issu d’une vraie réflexion MERISE : règles de gestion, dictionnaire de données, MCD, MLD, puis script SQL.
+## État du projet
 
-Côté déploiement, le projet utilisera **Docker Compose**. Les SISR devront mettre en place un environnement de développement comprenant au minimum le backend PHP/Slim, PostgreSQL, Adminer et éventuellement Nginx. Une réflexion sera également menée sur un environnement de production plus sécurisé avec reverse proxy, HTTPS, variables d’environnement, sauvegardes et logs.
+### Phase 1 — juin
 
-Côté intégrations externes, **Weezevent** et **Brevo** sont au cœur du projet. L’objectif est de comprendre comment s’authentifier auprès de leurs API REST, récupérer des données, créer ou mettre à jour des contacts, gérer des attributs et synchroniser des informations entre les différents systèmes.
+La première semaine intensive a permis de produire un **MVP local dockerisé**. Le dashboard permet déjà de récupérer des événements Weezevent, d'extraire et traiter des données, d'identifier par exemple les nouveaux spectateurs venus au dernier événement, puis d'envoyer une liste vers Brevo.
 
-## 4. Organisation générale des équipes
+Le MVP a été présenté au club et validé dans son état de prototype.
 
-La classe sera répartie en pôles de travail. Les groupes pourront évoluer au cours de la semaine, mais chaque pôle doit avoir des responsabilités claires.
+### Phase 2 — septembre
 
-Un binôme assurera le pilotage projet. Ce binôme ne sera pas exempté de production technique ou documentaire, mais il sera garant de l’organisation : WBS, RACI, MoSCoW, Gantt, PERT simplifié, backlog, suivi des tâches, arbitrages et préparation de la démonstration finale. Idéalement, ce binôme sera composé d’un étudiant SLAM et d’un étudiant SISR.
+La deuxième semaine intensive vise la **livraison au client**. Les priorités sont la stabilisation, la prise en compte des retours client, la finalisation fonctionnelle, le déploiement sur VPS, les tests end-to-end, la documentation et la recette.
 
-Un pôle UX / UI travaillera sur la charte graphique, les parcours utilisateurs et les maquettes. Ce pôle devra produire des écrans réalistes, puis aider à leur intégration en HTML / Tailwind. Ce pôle peut accueillir des étudiants SISR, car le maquettage, l’ergonomie et la documentation visuelle sont des tâches transversales.
+## Organisation documentaire
 
-Un pôle MERISE / données / RGPD travaillera sur les règles de gestion, le dictionnaire de données, le MCD, le MLD, le script SQL et les données de test. Ce pôle est prioritaire en début de semaine, car le backend dépend directement de la structure de la base.
+Le dépôt est volontairement découpé par usage :
 
-Un pôle backend PHP / Slim travaillera sur l’API REST. Il devra gérer la connexion à PostgreSQL, les routes, les appels aux API Weezevent et Brevo, la création et la consultation des contacts, les statistiques et les segments.
+```text
+00-projet/                  Contexte global, besoin, architecture, glossaire
+01-semaine-1-mvp/            Organisation et bilan de la première semaine
+02-semaine-2-livraison/      Organisation de la deuxième semaine et livraison
+03-aides-techniques/         Supports techniques pour les étudiants
+04-suivi-projet/             Modèles WBS, MoSCoW, RACI, backlog, comptes rendus
+05-evaluation-bts/           Repères pour portfolio, tableau de synthèse et preuves
+```
 
-Un pôle frontend HTML / Tailwind / JavaScript travaillera sur les pages visibles du dashboard. Il devra produire des interfaces simples, propres et fonctionnelles, puis les connecter à l’API avec `fetch()`.
+## Principes à conserver
 
-Un pôle SISR / déploiement / sécurité / automatisation travaillera sur Docker, l’environnement technique, les sauvegardes, les logs, les variables d’environnement, la sécurité minimale et la documentation d’exploitation.
+- Le projet doit rester centré sur un besoin réel du club.
+- Les développements doivent privilégier un MVP stable plutôt qu'un périmètre trop large.
+- Les données personnelles doivent être manipulées avec prudence.
+- Les clés Weezevent et Brevo ne doivent jamais être versionnées.
+- Les étudiants doivent distinguer clairement contribution collective et contribution individuelle.
+- Les livrables doivent être exploitables par le client et réutilisables dans le cadre BTS SIO.
 
-## 5. Méthode projet imposée
+## Pile cible rappelée
 
-Le projet doit permettre de mettre en pratique les outils de gestion de projet vus en cours. Ces outils ne doivent pas rester théoriques : ils doivent aider la classe à organiser réellement le travail.
+- Frontend : HTML, Tailwind CSS, JavaScript vanilla.
+- Backend : PHP avec Slim.
+- Base de données : PostgreSQL.
+- Infrastructure : Docker Compose, puis VPS avec reverse proxy et HTTPS.
+- Intégrations : Weezevent et Brevo.
 
-Le binôme de pilotage devra produire un WBS pour découper le projet en lots et sous-tâches. Il devra aussi produire un MoSCoW pour distinguer les fonctionnalités indispensables, importantes, optionnelles et hors périmètre. Un RACI devra permettre de savoir qui est responsable, qui contribue, qui est consulté et qui doit être informé. Un Gantt simplifié devra présenter la planification de la semaine. Un PERT simplifié devra faire apparaître les dépendances critiques, notamment entre MERISE, base de données, API, front et déploiement.
+## À utiliser en début de séance
 
-Le backlog devra être tenu à jour chaque jour. Les tâches devront être rédigées clairement, avec un responsable, une priorité et un critère d’acceptation. Une tâche comme « faire le backend » est trop vague. Une tâche correcte serait plutôt : « Créer la route GET /contacts qui renvoie la liste des contacts au format JSON avec id, nom, prénom, email et segment principal. »
+Pour reprendre le projet rapidement :
 
-## 6. MoSCoW du projet
-
-Les fonctionnalités indispensables pour vendredi sont les suivantes : disposer d’un modèle de données cohérent, d’une base PostgreSQL fonctionnelle, d’une connexion à l’API Weezevent, d’une API Slim capable de lire et écrire les contacts, d’une interface HTML / Tailwind affichant les contacts, d’une fiche contact, d’un dashboard avec quelques statistiques, d’une segmentation simple, d’une synchronisation Brevo via API REST, d’un environnement Docker de développement et d’une documentation minimale.
-
-Les fonctionnalités importantes mais non bloquantes sont les suivantes : authentification simple, gestion de deux rôles, détection basique des doublons, historique des synchronisations, sauvegarde automatique de la base, interface plus soignée, messages d’erreur clairs et synchronisation bidirectionnelle avec Brevo.
-
-Les fonctionnalités optionnelles sont les suivantes : récupération avancée des événements Weezevent, environnement de production complet avec Nginx et HTTPS, graphiques avancés, tests automatisés, CI/CD, historique détaillé des campagnes et restauration automatisée documentée.
-
-Les éléments hors périmètre pour cette semaine sont les suivants : CRM complet, application mobile, espace supporter public, paiement intégré, connexion FFVB réelle, programme de fidélité complet, refonte du site du club et automatisations marketing avancées en production.
-
-## 7. Planning détaillé de la semaine
-
-### Lundi matin — Cadrage, méthode projet et MVP
-
-La première demi-journée sert à poser le cadre. La classe reprend le contexte du Nice Volley Ball, les travaux déjà réalisés et l’objectif final du prototype. Le binôme de pilotage anime la clarification du MVP. Il formalise les premières versions du MoSCoW, du WBS et du backlog.
-
-Le pôle MERISE démarre immédiatement. Il doit identifier les principales entités : contact, événement, achat, synchronisation, segment, campagne, utilisateur, rôle et consentement éventuel. Il commence les règles de gestion et prépare une première version du MCD.
-
-Le pôle technique confirme la pile retenue : HTML, Tailwind, JavaScript vanilla, PHP Slim, PostgreSQL, Docker Compose, API Weezevent et API Brevo.
-
-Livrables attendus lundi midi : MVP validé, groupes constitués, MoSCoW V1, WBS V1, premières entités identifiées, backlog initial.
-
-### Lundi après-midi — Squelettes techniques et premières conceptions
-
-Le pôle MERISE finalise un MCD V1 et commence le MLD. Le pôle backend crée le projet Slim, prépare l’arborescence, configure Composer, met en place une première route de test et prépare la connexion à PostgreSQL. Le pôle frontend prépare les premières pages HTML, installe ou configure Tailwind, crée une structure de fichiers claire et commence les écrans statiques.
-
-Le pôle SISR prépare un premier docker-compose de développement avec PostgreSQL, Adminer et le backend PHP. Il documente les commandes de lancement. Le pôle UX produit les premières maquettes du dashboard, de la liste contacts, de la fiche contact et de l’écran de synchronisation.
-
-Livrables attendus lundi soir : dépôt Git initial, docker-compose DEV initial, projet Slim lancé, première page HTML/Tailwind, MCD V1, MLD V1, maquettes V1.
-
-### Mardi matin — Base de données et premières routes API
-
-Le mardi matin est consacré au socle de données. Le pôle MERISE produit le script SQL de création de base et un jeu de données fictif.
-
-Le backend développe les premières routes : liste des contacts, détail d’un contact, création d’un contact de test et route de santé de l’API. Il commence également l’étude de l’authentification et des endpoints de l’API Weezevent.
-
-Le frontend commence à appeler l’API avec `fetch()` pour afficher une réponse simple dans une page HTML.
-
-Le SISR stabilise Docker : variables d’environnement, volume PostgreSQL, accès Adminer en développement, documentation d’installation.
-
-Livrables attendus mardi midi : script SQL fonctionnel, base PostgreSQL créée, premières routes API, premier appel `fetch()` depuis une page HTML.
-
-### Mardi après-midi — Connexion à l’API Weezevent
-
-Le mardi après-midi, le backend développe la connexion à l’API Weezevent. L’objectif est de récupérer les événements, participants ou données de billetterie nécessaires au projet, puis de les intégrer dans la base PostgreSQL.
-
-Le frontend développe l’écran de synchronisation : bouton de synchronisation, affichage du résultat, nombre d’enregistrements récupérés et éventuelles erreurs.
-
-Le pôle UX ajuste les maquettes selon ce qui est réellement faisable. Le binôme projet met à jour le RACI et le Gantt.
-
-Livrables attendus mardi soir : connexion API Weezevent fonctionnelle ou partiellement fonctionnelle, synchronisation de données, tableau contacts alimenté dynamiquement, RACI V1, Gantt V1.
-
-### Mercredi matin — Fiche contact, dashboard et segmentation
-
-Le mercredi matin doit produire de la valeur métier. Le backend ajoute les routes permettant de récupérer une fiche contact détaillée, les statistiques du dashboard et les premiers segments. Les règles de segmentation doivent rester simples : nouveau visiteur, supporter régulier, abonné potentiel, contact inactif.
-
-Le frontend développe la fiche contact et le tableau de bord. Les statistiques peuvent être affichées sous forme de cartes simples : nombre total de contacts, nouveaux contacts, visiteurs récurrents, abonnés potentiels et nombre de billets ou participations récupérés depuis Weezevent.
-
-Le pôle MERISE vérifie que les routes et les données respectent le modèle. Le SISR commence les scripts de sauvegarde PostgreSQL.
-
-Livrables attendus mercredi midi : fiche contact, route statistiques, route segments, dashboard simple, script de sauvegarde initial.
-
-### Mercredi après-midi — Intégration Brevo
-
-Le mercredi après-midi est consacré à Brevo. Le backend doit réussir un appel API Brevo sur un compte de test : création ou mise à jour d’un contact, ajout à une liste ou synchronisation d’un segment.
-
-Le frontend développe l’écran de segmentation et de synchronisation : choix d’un segment, prévisualisation des contacts concernés et bouton de synchronisation vers Brevo.
-
-Le SISR documente la gestion des clés API : fichier `.env`, variables d’environnement, exclusion du dépôt Git et règles de sécurité.
-
-Livrables attendus mercredi soir : synchronisation Brevo fonctionnelle ou partiellement fonctionnelle, écran segments, documentation des variables sensibles, logs de synchronisation.
-
-### Jeudi matin — Authentification, rôles et sécurité
-
-Le jeudi matin sert à sécuriser le prototype. Le backend met en place une authentification simple si elle n’existe pas encore. L’objectif n’est pas de développer un système complexe, mais de comprendre les principes : mot de passe hashé, route de connexion, session ou token simple, protection minimale des routes sensibles.
-
-Si le temps le permet, deux rôles sont prévus : administrateur et utilisateur restreint. L’administrateur peut lancer les synchronisations Weezevent et Brevo et consulter les données. L’utilisateur restreint peut consulter le dashboard et les contacts, mais ne peut pas déclencher les synchronisations.
-
-Le frontend ajoute l’écran de connexion et adapte l’affichage selon le rôle si cette partie est prête. Le SISR vérifie que la base n’est pas exposée publiquement, qu’Adminer est réservé au développement, que les secrets ne sont pas versionnés et que les sauvegardes ne sont pas accessibles depuis le web.
-
-Livrables attendus jeudi midi : connexion simple, protection minimale des routes, checklist sécurité, séparation claire entre données de test et données sensibles.
-
-### Jeudi après-midi — Intégration, tests et documentation
-
-À partir du jeudi après-midi, les grosses nouvelles fonctionnalités doivent être limitées. La priorité devient l’intégration. Les groupes doivent corriger les bugs, tester les parcours, stabiliser les écrans, documenter les routes API, documenter l’installation et préparer la démonstration.
-
-Le binôme projet organise une recette interne. Le scénario testé doit être complet : lancer l’environnement, créer la base, synchroniser les données Weezevent, afficher les contacts, ouvrir une fiche contact, consulter le dashboard, générer un segment, synchroniser vers Brevo, vérifier les logs et lancer une sauvegarde.
-
-Livrables attendus jeudi soir : version intégrée, documentation technique, documentation utilisateur courte, scénario de recette, liste des fonctionnalités réellement disponibles.
-
-### Vendredi matin — Préparation de la démonstration finale
-
-Le vendredi matin est consacré à la préparation de la restitution. La démonstration doit être unifiée. Il ne faut pas présenter cinq travaux indépendants, mais un projet global.
-
-Le binôme projet prépare l’introduction : contexte, besoin, MVP, organisation, méthode de travail. Le pôle UX présente la logique des écrans. Le pôle MERISE présente le modèle de données. Le pôle backend présente l’API Slim, l’intégration Weezevent et l’intégration Brevo. Le pôle frontend présente l’interface HTML / Tailwind / JavaScript. Le pôle SISR présente Docker, le déploiement, la sécurité, les logs et les sauvegardes.
-
-Livrables attendus vendredi midi : support de présentation, démonstration répétée, rôles de présentation répartis, application prête à être montrée.
-
-### Vendredi après-midi — Démonstration, bilan et perspectives
-
-Le vendredi après-midi est consacré à la démonstration finale, puis au bilan. Chaque étudiant doit être capable d’expliquer sa contribution personnelle. La restitution doit montrer ce qui fonctionne réellement, ce qui reste à faire, les difficultés rencontrées et les choix effectués.
-
-Le bilan devra être honnête. Il devra distinguer les fonctionnalités terminées, les fonctionnalités partiellement terminées, les limites techniques, les risques, les évolutions possibles et les tâches à poursuivre après la semaine intensive.
-
-Livrables attendus vendredi soir : prototype démontrable, documentation, MCD/MLD, script SQL, schéma d’infrastructure, backlog restant, bilan projet et contributions individuelles.
-
-## 8. Missions détaillées par pôle
-
-### Pôle Pilotage projet
-
-Le pôle pilotage est responsable de l’organisation globale. Il tient à jour le WBS, le MoSCoW, le RACI, le Gantt, le PERT simplifié et le backlog. Il anime les points d’avancement, identifie les blocages, alerte sur les retards et prépare la démonstration finale.
-
-Il doit veiller à ce que les groupes ne travaillent pas en silo. Le modèle de données doit correspondre aux besoins de l’API. L’API doit fournir les données nécessaires au front. Le front doit respecter les maquettes. Le déploiement doit être compatible avec les choix techniques.
-
-**Livrables attendus :**
-
-* WBS complet
-* Backlog quotidiennement mis à jour
-* RACI du projet
-* Gantt simplifié
-* PERT simplifié
-* Compte-rendus des points d’avancement
-* Support de démonstration finale
-
-### Pôle UX / UI / maquettes
-
-Le pôle UX / UI produit une charte graphique courte et des maquettes exploitables. Il travaille sur l’ergonomie du dashboard, le parcours de synchronisation, la consultation d’un contact, l’affichage des statistiques et la gestion des segments.
-
-Il doit aussi aider à l’intégration HTML / Tailwind. Ses productions doivent donc être réalistes : composants simples, boutons clairs, tableaux lisibles, messages d’erreur compréhensibles, états vides, états de succès et écrans cohérents.
-
-**Livrables attendus :**
-
-* Charte graphique simplifiée
-* Maquette du dashboard
-* Maquette de la liste des contacts
-* Maquette de la fiche contact
-* Maquette de l’écran de synchronisation
-* Guide rapide des composants UI
-
-### Pôle MERISE / données / RGPD
-
-Le pôle MERISE est responsable de la cohérence des données. Il rédige les règles de gestion, le dictionnaire de données, le MCD (Modèle Conceptuel de Données), le MLD (Modèle Logique de Données) et veille à la qualité, à l’intégrité et à la traçabilité des informations au sein du système d’information.
-
-Il accompagne les équipes métiers dans la formalisation des besoins, la modélisation des processus et la définition des référentiels de données. Il s’assure également de la bonne application des normes et méthodes de conception des bases de données.
-
-Dans le cadre du RGPD, le pôle participe à l’identification et à la qualification des données à caractère personnel, contribue à la tenue du registre des traitements, veille au respect des principes de protection des données dès la conception (« privacy by design ») et collabore avec le DPO pour garantir la conformité réglementaire.
-
-Enfin, il assure un rôle de conseil et de support auprès des différents acteurs du projet afin de garantir une gouvernance des données efficace et pérenne.
-
-**Livrables attendus :**
-
-* Règles de gestion
-* Dictionnaire de données
-* MCD
-* MLD
-* Script SQL de création
-* Jeu de données de test
-* Analyse RGPD simplifiée
-
-### Pôle Backend PHP / Slim
-
-Le pôle backend développe l’ensemble des services applicatifs exposés par l’API REST. Il met en place l’architecture du projet Slim, la connexion à PostgreSQL, les routes métier et les échanges avec les API externes.
-
-Il est responsable de la récupération des données Weezevent, de leur traitement, de leur stockage et de leur mise à disposition pour le frontend. Il développe également les mécanismes de segmentation, les statistiques du dashboard et les synchronisations vers Brevo.
-
-Le code doit être structuré, documenté et testé manuellement. Les réponses API doivent être cohérentes, sécurisées et conformes aux besoins du frontend.
-
-**Livrables attendus :**
-
-* Projet Slim fonctionnel
-* Routes API documentées
-* Connexion PostgreSQL
-* Synchronisation Weezevent
-* Gestion des contacts
-* Gestion des segments
-* Statistiques du dashboard
-* Synchronisation Brevo
-* Documentation technique API
-
-### Pôle Frontend HTML / Tailwind / JavaScript
-
-Le pôle frontend développe l’interface utilisateur du dashboard. Il transforme les maquettes en pages HTML fonctionnelles et assure les interactions avec l’API via JavaScript et `fetch()`.
-
-Il est responsable de l’affichage des données, de la navigation entre les écrans, de la gestion des formulaires, des messages utilisateur et de la cohérence visuelle de l’application.
-
-Le frontend doit rester simple, lisible et démontrable. La priorité est donnée à la fonctionnalité et à la clarté plutôt qu’aux effets visuels avancés.
-
-**Livrables attendus :**
-
-* Tableau de bord
-* Liste des contacts
-* Fiche contact
-* Écran de synchronisation Weezevent
-* Écran de segmentation
-* Écran de synchronisation Brevo
-* Écran de connexion (si réalisé)
-* Intégration complète avec l’API
-
-### Pôle SISR / Déploiement / Sécurité / Automatisation
-
-Le pôle SISR est responsable de l’environnement technique du projet. Il met en place Docker Compose, prépare les services nécessaires au développement et documente les procédures d’installation et d’exploitation.
-
-Il veille à la sécurité minimale du prototype : gestion des secrets, isolation des services, sauvegardes, journalisation et contrôle des accès. Il prépare également les bases d’un futur déploiement en production.
-
-Le pôle accompagne les autres équipes sur les problématiques d’infrastructure, de réseau, de configuration et d’automatisation.
-
-**Livrables attendus :**
-
-* Docker Compose fonctionnel
-* Documentation d’installation
-* Gestion des variables d’environnement
-* Procédure de sauvegarde PostgreSQL
-* Procédure de restauration
-* Gestion des logs
-* Checklist sécurité
-* Schéma d’infrastructure
-* Documentation d’exploitation
-
-## 9. Livrables finaux attendus
-
-À la fin de la semaine, la classe devra remettre ou présenter les éléments suivants :
-
-* Prototype fonctionnel du dashboard
-* Dépôt Git propre et documenté
-* MCD et MLD
-* Script SQL de création de la base
-* Documentation utilisateur courte
-* Documentation technique
-* Documentation d’exploitation
-* Docker Compose fonctionnel
-* Présentation finale
-* Backlog final
-* Bilan des fonctionnalités réalisées et non réalisées
-
-## 10. Critères d’évaluation
-
-L’évaluation du projet pourra s’appuyer sur plusieurs critères :
-
-### Fonctionnalité
-
-* Les synchronisations fonctionnent-elles ?
-* Les données sont-elles correctement stockées ?
-* Les contacts sont-ils consultables ?
-* Les segments sont-ils exploitables ?
-* La démonstration est-elle fluide ?
-
-### Qualité technique
-
-* Architecture cohérente
-* Respect des bonnes pratiques
-* Qualité du modèle de données
-* Qualité du code
-* Documentation suffisante
-
-### Gestion de projet
-
-* Utilisation réelle du WBS
-* Utilisation du backlog
-* Mise à jour du RACI
-* Respect du planning
-* Communication entre les pôles
-
-### Infrastructure et sécurité
-
-* Docker opérationnel
-* Sauvegardes documentées
-* Gestion correcte des secrets
-* Journalisation minimale
-* Documentation d’exploitation
-
-### Présentation finale
-
-* Clarté des explications
-* Répartition équilibrée de la parole
-* Démonstration cohérente
-* Capacité à justifier les choix techniques
-* Analyse honnête des limites et perspectives
-
-
+1. Lire [Contexte client et besoin métier](00-projet/contexte-client.md).
+2. Relire le [Bilan du MVP livré en juin](01-semaine-1-mvp/bilan-mvp-juin.md).
+3. Ouvrir les [Retours client à intégrer](02-semaine-2-livraison/retours-client-alexandre.md).
+4. Compléter le [Micro-cahier des charges V2](02-semaine-2-livraison/micro-cahier-des-charges-v2.md).
+5. Affecter les étudiants avec [Organisation par pôles](02-semaine-2-livraison/organisation-poles.md).
