@@ -1,97 +1,35 @@
-# Flux métier et traitements principaux
+# Flux métier du dashboard
 
-Ce document décrit les flux à stabiliser pour la semaine 2. Il sert de passerelle entre les besoins client, le modèle de données, les routes API, les écrans et les tests.
+## Flux 1 — Synchroniser Weezevent
 
-## Flux 1 — Synchronisation Weezevent
+1. l'utilisateur lance la synchronisation ;
+2. le backend appelle Weezevent ;
+3. les événements, billets, contacts et invitations disponibles sont récupérés ;
+4. les données sont normalisées ;
+5. les doublons sont traités ;
+6. la base est mise à jour ;
+7. un bilan est affiché et journalisé.
 
-Objectif : récupérer les données utiles de billetterie depuis Weezevent et les intégrer dans le dashboard.
+## Flux 2 — Exporter les contacts d'un événement
 
-Déclencheur : action manuelle d'un gestionnaire ou tâche automatisée future.
+1. l'utilisateur sélectionne un événement ;
+2. le dashboard affiche les contacts associés ;
+3. l'utilisateur déclenche l'export ;
+4. le fichier exporté contient uniquement les champs nécessaires ;
+5. le résultat est vérifié sur un jeu de données connu.
 
-Entrées attendues : événements, commandes, billets, invitations, statut de présence si disponible, informations de contact.
+## Flux 3 — Identifier les nouveaux spectateurs
 
-Traitements :
+Un nouveau spectateur est, dans la règle de départ, un contact dont la première participation connue correspond à l'événement sélectionné. La règle doit être documentée et testée.
 
-- appeler l'API Weezevent ;
-- transformer les données externes en format interne ;
-- créer ou mettre à jour les événements ;
-- créer ou mettre à jour les contacts ;
-- associer billets, commandes ou participations ;
-- tracer la synchronisation ;
-- signaler les erreurs sans bloquer tout le traitement si possible.
+## Flux 4 — Gérer invitations et tickets offerts
 
-Sortie attendue : un bilan de synchronisation indiquant au minimum le nombre d'éléments récupérés, créés, mis à jour, ignorés et en erreur.
+Le système doit distinguer les tickets classiques des invitations lorsque les données Weezevent le permettent. La présence réelle doit être affichée uniquement si l'information existe dans les données accessibles.
 
-## Flux 2 — Contacts d'un événement
+## Flux 5 — Gérer consentement et désinscription
 
-Objectif : permettre au club d'obtenir tous les contacts associés à un match ou événement.
+Un contact désinscrit ou non éligible ne doit pas être envoyé vers Brevo. Le bilan d'envoi doit indiquer les contacts envoyés, ignorés et en erreur.
 
-Règle fonctionnelle : un contact est associé à un événement s'il possède au moins un billet, une commande, une invitation ou une présence rattachée à cet événement.
+## Flux 6 — Préparer la passation SISR
 
-Sorties possibles : affichage écran, export CSV, liste exploitable pour Brevo.
-
-Points à valider : champs exportés, ordre des colonnes, inclusion ou exclusion des contacts sans email, traitement des doublons.
-
-## Flux 3 — Nouveaux spectateurs
-
-Objectif : identifier les personnes venues pour la première fois lors d'un événement donné.
-
-Règle de départ : un nouveau spectateur est un contact présent ou inscrit à l'événement sélectionné et qui ne possède pas d'achat ou présence antérieure dans l'historique connu.
-
-Limite : le résultat dépend de l'historique réellement récupéré depuis Weezevent. Si l'historique est incomplet, le dashboard doit l'indiquer.
-
-## Flux 4 — Invitations et tickets offerts
-
-Objectif : distinguer les billets payants des invitations ou tickets offerts.
-
-Données nécessaires : type de billet, tarif, code invitation, canal d'émission, statut de scan ou présence si disponible.
-
-Règles à stabiliser :
-
-- une invitation doit être identifiable dans les données Weezevent ;
-- une invitation utilisée correspond à une invitation rattachée à une présence ou un scan ;
-- une invitation non utilisée correspond à une invitation émise sans présence confirmée ;
-- si le statut de présence n'est pas disponible, le système doit afficher une limite explicite.
-
-## Flux 5 — Consentement et désinscription
-
-Objectif : éviter d'envoyer vers Brevo des contacts qui ne doivent pas recevoir de communications.
-
-Statuts minimaux recommandés : consentement inconnu, consentement accepté, désinscrit, opposition.
-
-Règle minimale : un contact désinscrit ou en opposition ne doit pas être synchronisé vers une liste marketing Brevo.
-
-Points à tracer : date de désinscription, source du consentement, dernière synchronisation Brevo, raison d'exclusion éventuelle.
-
-## Flux 6 — Synchronisation ou export Brevo
-
-Objectif : envoyer vers Brevo une liste de contacts éligibles issue d'un segment ou d'un événement.
-
-Traitements :
-
-- sélectionner le segment ou l'événement ;
-- filtrer les contacts sans consentement valide selon la règle retenue ;
-- exclure les désinscrits ;
-- préparer la liste ;
-- appeler l'API Brevo ou générer un export compatible ;
-- enregistrer le bilan.
-
-Sortie attendue : nombre de contacts envoyés, ignorés, déjà présents, en erreur.
-
-## Flux 7 — Livraison et exploitation
-
-Objectif : rendre le service utilisable par le client.
-
-Éléments attendus : environnement cible, URL, HTTPS, variables d'environnement, sauvegarde, restauration, procédure de mise à jour, documentation utilisateur, documentation d'exploitation, PV de recette.
-
-## Principe de validation
-
-Chaque flux doit être relié à au moins :
-
-- une fonctionnalité ;
-- un écran ou une route API ;
-- une donnée ou table concernée ;
-- un test de recette ;
-- une preuve livrable.
-
-Voir aussi : [Matrice de traçabilité](../02-semaine-2-livraison/matrice-tracabilite.md).
+La phase 2 doit fournir : image Docker, tag, variables d'environnement, ports, volumes, migrations, commandes de santé, limites connues et procédure de lancement.

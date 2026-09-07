@@ -2,12 +2,12 @@
 
 ## Vue générale
 
-Le dashboard est conçu comme une application web interne composée d'un frontend, d'un backend API, d'une base de données et de connecteurs vers les services externes.
+Le dashboard est une application web interne composée d'un frontend, d'un backend API, d'une base de données et de connecteurs vers Weezevent et Brevo.
 
 ```text
 Navigateur utilisateur
         |
-        | HTTPS
+        | HTTPS après phase 3
         v
 Reverse proxy / serveur web
         |
@@ -20,71 +20,51 @@ Reverse proxy / serveur web
                     +--> API Brevo
 ```
 
-## Frontend
+## Phase 2 — périmètre SLAM
 
-Le frontend reste volontairement simple et pédagogique :
+La phase 2 doit livrer :
 
-- HTML ;
-- Tailwind CSS ;
-- JavaScript vanilla ;
-- appels API avec `fetch()` ;
-- pages dashboard, événements, contacts, segments, synchronisations et administration simple.
-
-Aucun framework frontend de type React, Vue ou Angular n'est prévu dans le périmètre pédagogique.
-
-## Backend
-
-Le backend est développé avec :
-
-- PHP ;
-- Slim ;
+- frontend HTML, Tailwind CSS, JavaScript vanilla ;
+- backend PHP/Slim ;
 - routes REST ;
-- réponses JSON ;
 - accès PostgreSQL ;
 - intégration Weezevent ;
 - intégration Brevo ;
-- logs fonctionnels ;
-- gestion des erreurs.
+- consentement et désinscription ;
+- export des contacts par événement ;
+- traitement des invitations lorsque les données le permettent ;
+- tests end-to-end applicatifs ;
+- documentation utilisateur ;
+- documentation technique pour passation ;
+- image Docker publiée ou exportable.
+
+La phase 2 ne vise pas le déploiement final sur VPS.
+
+## Phase 3 — périmètre SISR
+
+La phase 3 prendra l'image fournie par les SLAM et devra gérer :
+
+- VPS et accès SSH ;
+- Docker / Docker Compose ;
+- variables d'environnement et secrets ;
+- reverse proxy ;
+- HTTPS ;
+- sauvegardes PostgreSQL ;
+- restauration testée ;
+- logs ;
+- automatisations ;
+- procédure de mise à jour ;
+- recette technique.
 
 ## Base de données
 
-Le projet utilise PostgreSQL. Le modèle doit permettre au minimum de gérer :
-
-- contacts ;
-- événements ;
-- billets ou commandes ;
-- invitations ;
-- consentements ;
-- désinscriptions ;
-- segments ;
-- synchronisations ;
-- logs.
-
-## Infrastructure
-
-La phase 1 repose sur des environnements locaux dockerisés. La phase 2 vise un déploiement sur VPS.
-
-Éléments attendus :
-
-- Docker Compose ;
-- fichier de configuration de production ;
-- variables d'environnement ;
-- reverse proxy ;
-- HTTPS ;
-- sauvegarde PostgreSQL ;
-- restauration testée ;
-- logs ;
-- pipeline de déploiement automatique ou semi-automatique.
+PostgreSQL doit gérer au minimum : contacts, événements, billets ou commandes, invitations, consentements, désinscriptions, segments, synchronisations et logs.
 
 ## Sécurité minimale
 
-Les points suivants sont non négociables :
-
 - pas de clé API dans Git ;
-- pas de mot de passe en clair dans le dépôt ;
+- pas de mot de passe en clair ;
 - `.env` exclu du versioning ;
-- secrets configurés sur le serveur ou dans le pipeline ;
-- accès SSH sécurisé ;
-- base non exposée publiquement ;
-- sauvegardes protégées ;
-- données personnelles masquées dans les captures publiques.
+- `.env.example` maintenu ;
+- base non exposée publiquement après déploiement ;
+- captures anonymisées si données réelles.

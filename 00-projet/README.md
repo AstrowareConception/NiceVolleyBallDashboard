@@ -2,13 +2,9 @@
 
 ## Objectif
 
-Le projet **Nice Volley Ball Dashboard** vise à fournir au club un outil interne permettant de mieux exploiter les données issues de ses outils existants, principalement Weezevent et Brevo.
+Le projet **Nice Volley Ball Dashboard** vise à fournir au club un outil interne permettant de mieux exploiter les données issues de Weezevent et Brevo.
 
-L'enjeu n'est pas de remplacer ces outils, mais de créer une couche de centralisation, de traitement et de pilotage permettant au club de mieux comprendre ses publics et d'agir plus efficacement.
-
-## Problème initial
-
-Le club dispose de plusieurs sources de données, mais celles-ci restent dispersées. Les informations de billetterie, de communication, de contacts et de suivi interne ne sont pas suffisamment croisées. Le club manque donc d'une vision consolidée sur ses spectateurs, ses nouveaux visiteurs, ses supporters réguliers, ses invités et ses contacts mobilisables pour des campagnes ciblées.
+L'enjeu n'est pas de remplacer ces outils, mais de créer une couche de centralisation, de traitement et de pilotage pour mieux comprendre les publics du club : spectateurs, nouveaux visiteurs, supporters réguliers, invités, contacts éligibles aux campagnes.
 
 ## Solution visée
 
@@ -16,47 +12,40 @@ Le dashboard doit permettre :
 
 - la récupération de données depuis Weezevent ;
 - le stockage structuré des événements, contacts, billets et invitations ;
-- l'identification de publics utiles, par exemple les nouveaux spectateurs du dernier événement ;
-- l'export ou la synchronisation de listes vers Brevo ;
+- l'identification des nouveaux spectateurs ;
+- l'export des contacts d'un événement ;
+- l'envoi ou la synchronisation de listes vers Brevo ;
 - la prise en compte du consentement et de la désinscription ;
 - la consultation d'indicateurs simples ;
 - une exploitation sécurisée et documentée par le club.
 
-## Documents de référence projet
+## Découpage en trois phases
 
-- [Contexte client et besoin métier](contexte-client.md)
-- [Architecture et pile technique cible](architecture-cible.md)
-- [Flux métier et traitements](flux-metier.md)
-- [Diagrammes Mermaid](diagrammes.md)
-- [Glossaire projet](glossaire.md)
+### Phase 1 — MVP de juin
 
-## Deux temps de réalisation
+La première semaine a permis de produire un prototype fonctionnel local : récupération Weezevent, traitement de données, segmentation simple et envoi vers Brevo.
 
-### Semaine 1 — MVP
+Voir : [Phase 1 — MVP](../01-semaine-1-mvp/README.md)
 
-La première semaine a permis de cadrer le besoin et de produire un premier prototype fonctionnel local. Cette phase a validé la faisabilité technique générale : récupération Weezevent, traitement de données, segmentation simple et envoi vers Brevo.
+### Phase 2 — finalisation SLAM
 
-Voir : [Semaine 1 — MVP](../01-semaine-1-mvp/README.md)
+La deuxième semaine est recentrée sur 5 étudiants SLAM. L'objectif est de terminer l'application, stabiliser le code, produire une image Docker et documenter l'utilisation client ainsi que la passation technique aux SISR.
 
-### Semaine 2 — livraison
+Voir : [Phase 2 — finalisation SLAM](../02-semaine-2-finalisation-slam/README.md)
 
-La deuxième semaine doit transformer le prototype en produit livrable : intégration des retours client, robustesse, déploiement, tests, documentation et recette.
+### Phase 3 — déploiement SISR
 
-Voir : [Semaine 2 — livraison](../02-semaine-2-livraison/README.md)
+Les SISR prendront ensuite le relais pour installer le serveur, déployer l'image Docker, configurer HTTPS, sauvegardes, restauration, automatisations et exploitation.
 
-## Public pédagogique
+Voir : [Phase 3 — déploiement SISR](../03-phase-3-deploiement-sisr/README.md)
 
-Le projet mobilise des étudiants BTS SIO, options SLAM et SISR. Il est majoritairement orienté développement applicatif, mais il contient aussi des travaux importants d'infrastructure, de déploiement, de sécurité, de sauvegarde, d'automatisation et de documentation d'exploitation.
+## Livrables globaux
 
-## Livrables globaux attendus
-
-- micro-cahier des charges ;
-- modèle de données ;
 - application fonctionnelle ;
-- documentation technique ;
-- documentation utilisateur ;
-- documentation d'exploitation ;
-- environnement de déploiement ;
-- plan de test et recette ;
+- image Docker publiée ou exportable ;
+- documentation utilisateur client ;
+- documentation technique SISR ;
+- matrice de traçabilité ;
+- plan de test ;
 - bilan projet ;
 - preuves exploitables pour le portfolio BTS SIO.
